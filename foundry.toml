@@ -1,0 +1,60 @@
+# Full reference https://github.com/foundry-rs/foundry/tree/master/crates/config
+
+[profile.default]
+evm_version = "prague"
+fuzz = { runs = 1_000 }
+viaIR = true
+gas_reports = ["*"]
+optimizer = true
+optimizer_runs = 10_000
+out = "out"
+script = "script"
+solc = "0.8.28"
+src = "src"
+test = "test"
+libs = ["node_modules", "dependencies"]
+no_match_coverage = "^(script|utils|test)/.*"
+remappings = [
+    "forge-std/=dependencies/forge-std-1.10.0/src/",
+    "@openzeppelin/contracts=dependencies/@openzeppelin-contracts-5.1.0/",
+]
+
+[profile.ci]
+fuzz = { runs = 10_000 }
+verbosity = 4
+
+[fmt]
+bracket_spacing = true
+int_types = "long"
+line_length = 120
+multiline_func_header = "all"
+number_underscore = "thousands"
+quote_style = "double"
+tab_width = 4
+wrap_comments = true
+
+[dependencies]
+"forge-std" = "1.10.0"
+"@openzeppelin-contracts" = "5.1.0"
+
+[etherscan]
+mainnet = { key = "${API_KEY_ETHERSCAN}" }
+base = { key = "${API_KEY_ETHERSCAN}", url = "https://api.basescan.org/api" }
+sepolia = { key = "${API_KEY_ETHERSCAN}", url = "https://api-sepolia.etherscan.io/api" }
+bsc = { key = "${API_KEY_ETHERSCAN}", url = "https://api.bscscan.com/api" }
+bsctestnet = { key = "${API_KEY_ETHERSCAN}", url = "https://data-seed-prebsc-1-s1.binance.org:8545" }
+
+[rpc_endpoints]
+arbitrum = "https://arbitrum-one-rpc.publicnode.com"
+avalanche = "https://avalanche-c-chain-rpc.publicnode.com"
+base = "https://mainnet.base.org"
+bsc = "https://bsc-dataseed.binance.org"
+bsctestnet = "https://data-seed-prebsc-1-s1.binance.org:8545"
+gnosis_chain = "https://rpc.gnosischain.com"
+localhost = "http://localhost:8545"
+mainnet = "https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+optimism = "https://optimism-rpc.publicnode.com"
+polygon = "https://polygon-bor-rpc.publicnode.com"
+sepolia = "https://ethereum-sepolia-rpc.publicnode.com"
+monad = "https://testnet-rpc.monad.xyz"
+local = {url = "http://127.0.0.1:8545" }

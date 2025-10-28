@@ -1,0 +1,47 @@
+{
+  "name": "@permutize/smart-accounts",
+  "description": "",
+  "version": "1.0.0",
+  "author": {
+    "name": "Permutize Org",
+    "url": "https://github.com/Permutize"
+  },
+  "devDependencies": {
+    "@lcov-viewer/cli": "^1.3.0",
+    "@types/bun": "^1.2.8",
+    "dotenv": "^17.2.3",
+    "inquirer": "^12.9.6",
+    "lcov-badge-generator": "^1.0.5",
+    "lint-staged": "^16.2.4",
+    "ora": "^9.0.0",
+    "simple-git-hooks": "^2.13.1",
+    "viem": "^2.38.0"
+  },
+  "keywords": [
+    "ethereum",
+    "foundry",
+    "smart-contracts",
+    "solidity",
+    "typescript"
+  ],
+  "private": true,
+  "simple-git-hooks": {
+    "pre-commit": "bunx lint-staged"
+  },
+  "lint-staged": {
+    "**/*.sol": [
+      "forge fmt",
+      "forge fmt --check"
+    ]
+  },
+  "scripts": {
+    "badge": "lcov-badge-generator ./coverage/lcov.info -o coverage/badge.svg",
+    "postinstall": "forge soldeer install && bunx simple-git-hooks",
+    "remappings": "forge remappings > remappings.txt",
+    "clean": "rm -rf cache out",
+    "build": "forge build",
+    "test": "forge test",
+    "test:coverage": "forge coverage",
+    "test:coverage:report": "forge coverage --report lcov && mv lcov.info ./coverage/lcov.info && lcov-viewer lcov -o ./coverage ./coverage/lcov.info"
+  }
+}
