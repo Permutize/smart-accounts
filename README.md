@@ -15,6 +15,39 @@ This project implements a sophisticated smart account system featuring:
 - **FeeManager**: Configurable fee management system with oracle-based pricing
 - **IncrementalNonce**: Efficient nonce management for batched transactions
 
+## Integration Flow (Gasless)
+
+The end-to-end gasless transfer flow spans client, backend, MetaAccount, and the network.
+
+### Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as Client - extension/app
+    participant B as Backend
+    participant MA as MetaAccount contract
+
+    U->>C: Initiate gasless action
+    C->>B: getGaslessQuote(chain, userAddress, token, calls)
+    B->>B: Policy/state validation and build EIP-712 Batch
+    B->>B: Cache quote data and fee
+    B-->>C: Quote with eip712, fee, metaAccountAddress, quoteId
+    C->>C: Local policy checks
+    C->>C: Sign EIP-712 Batch
+    C->>C: Create EIP-7702 Authorization
+    C->>B: executeGasless with quoteId, signature, authorization
+    B->>MA: Submit transaction, execute(batch, signature)
+    MA-->>C: Return receipt
+```
+
+## Contracts Docs
+
+See `docs/core-contracts.md` for detailed documentation of:
+- `BaseAccount.sol` – execution, signatures, nonces, events, errors
+- `FeeManager.sol` – token registry, fee rules, admin functions
+- `IncrementalNonces.sol` – monotonic nonces and checked consumption
+
 ## Key Features
 
 ### 🔐 **EIP-7702 Compatible Accounts**

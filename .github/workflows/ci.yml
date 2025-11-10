@@ -16,7 +16,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.head_ref == 'ci')
+    # Run on direct pushes to main, and on PRs targeting main (regardless of source branch name)
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.base_ref == 'main')
     steps:
       - name: "Check out the repo"
         uses: actions/checkout@v4
@@ -69,6 +70,7 @@ jobs:
   coverage:
     needs: ["test"]
     runs-on: "ubuntu-latest"
+    if: github.event_name == 'push' && github.base_ref == 'main'
     steps:
       - name: "Check out the repo"
         uses: "actions/checkout@v4"

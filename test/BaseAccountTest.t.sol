@@ -65,7 +65,8 @@ abstract contract BaseAccountTest is BaseTest {
         vm.txGasPrice(2);
         IFeeManager.TokenConfig[] memory tokenConfigs = new IFeeManager.TokenConfig[](1);
 
-        tokenConfigs[0] = (IFeeManager.TokenConfig({
+        tokenConfigs[0] =
+        (IFeeManager.TokenConfig({
                 token: token, decimals: token.decimals(), enabled: true, minFeeCost: 1000, maxFeeCost: 1000 * 1e6
             }));
 
@@ -347,11 +348,7 @@ abstract contract BaseAccountTest is BaseTest {
     /**
      * @notice Helper function to create a single call
      */
-    function _createCall(
-        address to,
-        uint256 value,
-        bytes memory data
-    )
+    function _createCall(address to, uint256 value, bytes memory data)
         internal
         pure
         returns (IBaseAccount.Call memory)
