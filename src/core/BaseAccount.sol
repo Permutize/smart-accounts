@@ -3,6 +3,7 @@
 pragma solidity ^0.8.28;
 
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
+import { Ownable2Step } from "@openzeppelin/contracts/access/Ownable2Step.sol";
 import { IERC1271 } from "@openzeppelin/contracts/interfaces/IERC1271.sol";
 import { IERC1155Receiver } from "@openzeppelin/contracts/interfaces/IERC1155Receiver.sol";
 import { IERC721Receiver } from "@openzeppelin/contracts/interfaces/IERC721Receiver.sol";
@@ -58,7 +59,16 @@ import { IIncrementalNonces } from "../interfaces/IIncrementalNonces.sol";
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-contract BaseAccount is IBaseAccount, IERC165, IERC1271, ERC1155Holder, ERC721Holder, EIP712, ReentrancyGuard, Ownable {
+contract BaseAccount is
+    IBaseAccount,
+    IERC165,
+    IERC1271,
+    ERC1155Holder,
+    ERC721Holder,
+    EIP712,
+    ReentrancyGuard,
+    Ownable2Step
+{
     using SafeERC20 for IERC20;
     using CallHash for Batch;
 

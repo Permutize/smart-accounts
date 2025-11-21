@@ -52,7 +52,14 @@ contract MetaAccount is BaseAccount {
     /// @dev This error is thrown when:
     /// - The target token is not enabled in the FeeManager
     /// - The call is not an ERC-20 transfer to the FeeManager
-    /// - The transfer amount is negative (though this is technically impossible with uint256)
+    /// - The transfer amount is outside the min/max fee range configured in FeeManager
+    /// - The calldata format is invalid (see _isValidFeeCall for expected format)
+    ///
+    /// Expected fee call format:
+    /// - target: enabled ERC-20 token address (registered in FeeManager)
+    /// - value: 0 (no ETH sent)
+    /// - data: abi.encodeWithSelector(IERC20.transfer.selector, address(FEE_MANAGER), feeAmount)
+    ///   where minFeeCost <= feeAmount <= maxFeeCost for the token
     error InvalidFeeCall();
 
     /**
@@ -125,9 +132,11 @@ contract MetaAccount is BaseAccount {
      * Call data format expected:
      * - First 4 bytes: IERC20.transfer.selector (0xa9059cbb)
      * - Next 32 bytes: recipient address (must be FeeManager)
-     * - Next 32 bytes: transfer amount (must be >= 0, which is always true for uint256)
+     * - Next 32 bytes: transfer amount (must be within min/max fee range)
      *
-     * @custom:security The amount >= 0 check is technically redundant for uint256 but kept for clarity
+     * @custom:security Only standard ERC-20 tokens should be enabled in FeeManager.
+     * Fee-on-transfer tokens MUST NOT be added to the allowlist as they would result
+     * in the FeeManager receiving less than the validated amount, enabling fee bypass.
      */
     function _isValidFeeCall(Call calldata call) internal view returns (bool) {
         IFeeManager.TokenConfig memory tokenInfo = FEE_MANAGER.supportedTokens(call.to);

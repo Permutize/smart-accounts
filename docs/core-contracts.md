@@ -17,7 +17,7 @@ This document describes the core smart contracts in `src/core/`: `BaseAccount.so
 - Simulation entry point `simulateBatch` for off-chain validation.
 
 ### Design Decisions
-- Uses OpenZeppelin `EIP712`, `ECDSA`, `ReentrancyGuard`, `Ownable`, and token receiver mixins (`ERC1155Holder`, `ERC721Holder`).
+- Uses OpenZeppelin `EIP712`, `ECDSA`, `ReentrancyGuard`, `Ownable2Step`, and token receiver mixins (`ERC1155Holder`, `ERC721Holder`).
 - Separates validation hooks: `_validateExecute(Call[] calls)` and `_validateExecute(Batch batch)` are `virtual` for derived contracts (e.g., `MetaAccount`) to enforce policies (such as fee payment as the first call).
 - Delegates nonce management to an external `IIncrementalNonces` to simplify replay protection and allow shared nonce semantics.
 
@@ -88,7 +88,7 @@ This document describes the core smart contracts in `src/core/`: `BaseAccount.so
 - Owner can withdraw accumulated fees in native or ERC-20.
 
 ### Design Decisions
-- Contract is `Ownable`; only owner can mutate token registry or withdraw.
+- Contract is `Ownable2Step`; only owner can mutate token registry or withdraw.
 - Uses `SafeERC20` for robust ERC-20 transfers.
 - Keeps minimal state (`_supportedTokens`) for simplicity; pricing markup and exchange rates are expected to be determined off-chain (e.g., by backend services).
 
