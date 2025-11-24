@@ -69,6 +69,13 @@ See `docs/core-contracts.md` for detailed documentation of:
 
 ## Deployments
 
+### Mainnet
+| Contract | Address |
+| -------- | ------- |
+| MetaAccount | 0xbd2C0dc6521CD25A8bb3943f50B5Eec7A9d9a8a2 |
+| FeeManager | 0x4631F923C3c470061A97e008ED9c33DA4349612c |
+| NonceManager | 0xfFf4baDfe0EB9731F5593fE7CEd5B1209055E640 |
+
 ### Sepolia
 
 | Contract | Address |
@@ -77,14 +84,6 @@ See `docs/core-contracts.md` for detailed documentation of:
 | FeeManager | 0x391F11D2f0c9B5eaAD57d7f748Fc58f9C3c31006 |
 | NonceManager | 0xE608E933E1842a52ABf91A14C481bBe87Cf31B69 |
 
-
-### Monad Testnet
-
-| Contract | Address |
-| -------- | ------- |
-| MetaAccount | 0x5eb7cdc494689bd2ed8c7b0783943870d14cc2e2 |
-| FeeManager | 0x01385048c81424bbF4C23dCeDa7A70aaE7092A48 |
-| NonceManager | 0xbB66Ce807781C7BEF91b97c3C10529e16373c8F0 |
 
 ## Architecture
 
