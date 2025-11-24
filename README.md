@@ -85,14 +85,6 @@ See `docs/core-contracts.md` for detailed documentation of:
 | NonceManager | 0xE608E933E1842a52ABf91A14C481bBe87Cf31B69 |
 
 
-### Monad Testnet
-
-| Contract | Address |
-| -------- | ------- |
-| MetaAccount | 0x5eb7cdc494689bd2ed8c7b0783943870d14cc2e2 |
-| FeeManager | 0x01385048c81424bbF4C23dCeDa7A70aaE7092A48 |
-| NonceManager | 0xbB66Ce807781C7BEF91b97c3C10529e16373c8F0 |
-
 ## Architecture
 
 ```
