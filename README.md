@@ -69,6 +69,13 @@ See `docs/core-contracts.md` for detailed documentation of:
 
 ## Deployments
 
+### Mainnet
+| Contract | Address |
+| -------- | ------- |
+| MetaAccount | 0xbd2C0dc6521CD25A8bb3943f50B5Eec7A9d9a8a2 |
+| FeeManager | 0x4631F923C3c470061A97e008ED9c33DA4349612c |
+| NonceManager | 0xfFf4baDfe0EB9731F5593fE7CEd5B1209055E640 |
+
 ### Sepolia
 
 | Contract | Address |
